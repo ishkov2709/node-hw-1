@@ -22,11 +22,11 @@ const removeContact = async (contactId) => {
 
   const removedContact = data.splice(currentIndex, 1);
   await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
-  return removedContact;
+  return removedContact[0];
 };
 
-const addContact = async (name = null, email = null, phone) => {
-  if (!phone) return null;
+const addContact = async (name, email, phone) => {
+  if (!name || !email || !phone) return null;
   const data = await listContacts();
   const newContact = {
     id: nanoid(),
